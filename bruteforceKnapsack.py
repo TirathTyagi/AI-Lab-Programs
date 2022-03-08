@@ -1,26 +1,34 @@
+from itertools import combinations
 def bruteForce(items,weightlim):
     print()
     print("------------------RESULT---------------------")
+    itemList = list()
+    remList = list()
     for i,j in items.items():
-        for k,l in items.items():
-            curList = list()
-            curCost = 0
-            curWeight = 0
-            curList.append(i)
-            if i != k:
-                curList.append(k)
-            for h in curList:
-                curCost = curCost + items[h][0]
-                curWeight = curWeight + items[h][1]
-            if len(curList) == 1:
-                print(curList, end="    || ")
-            else:
-                print(curList, end=" || ")
-            print("TOTAL COST: ",curCost,end=" || ")
-            if curWeight > weightlim:
-                curWeight = 'Not Feasible'
-            print("TOTAL WEIGHT: ",curWeight)
-            print()
+        itemList.append(i)
+    for n in range(len(itemList)):
+        remList+=list(combinations(itemList,n))
+    remList.append((1,2,3,4))
+    remList.remove(())
+    for i in remList:
+        curCost = 0
+        curWeight = 0
+        curList = list()
+        for j in i:
+            curList.append(j)
+        for h in curList:
+            curCost = curCost + items[h][0]
+            curWeight = curWeight + items[h][1]
+        if len(curList) == 1:
+            print(curList, end="    || ")
+        else:
+            print(curList, end=" || ")
+        print("TOTAL COST: ", curCost, end=" || ")
+        if curWeight > weightlim:
+            curWeight = 'Not Feasible'
+        print("TOTAL WEIGHT: ", curWeight)
+        print()
+    print(remList)
     print("------------------RESULT---------------------")
 if __name__ == '__main__':
     items = dict()
