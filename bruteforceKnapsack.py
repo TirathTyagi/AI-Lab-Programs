@@ -4,6 +4,9 @@ def bruteForce(items,weightlim):
     print("------------------RESULT---------------------")
     itemList = list()
     remList = list()
+    maxCost = 0
+    maxWeight = 0
+    maxList = list()
     for i,j in items.items():
         itemList.append(i)
     for n in range(len(itemList)):
@@ -27,8 +30,16 @@ def bruteForce(items,weightlim):
         if curWeight > weightlim:
             curWeight = 'Not Feasible'
         print("TOTAL WEIGHT: ", curWeight)
+        if curWeight != 'Not Feasible':
+            if curCost>maxCost:
+                maxCost = curCost
+                maxList = curList
+                maxWeight = curWeight
         print()
-    print(remList)
+    print()
+    print("SUBSET: ",maxList)
+    print("MAX COST: ",maxCost)
+    print("WEIGHT: ",maxWeight)
     print("------------------RESULT---------------------")
 if __name__ == '__main__':
     items = dict()
