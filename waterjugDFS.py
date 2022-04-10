@@ -68,7 +68,6 @@ class WaterJug():
             if frontier.empty():
                 raise Exception("There is no solution")
             node = frontier.remove()
-            print(node.state)
             self.numexp += 1
             if node.state == self.goal:
                 action = []
@@ -80,7 +79,7 @@ class WaterJug():
                 action.reverse()
                 cells.reverse()
                 self.solution = (action, cells)
-                return
+                return self.solution
             self.explored.add(node.state)
             for i, j in self.neighbors(node.state):
                 if not frontier.contains_state(j) and j not in self.explored:
@@ -104,4 +103,10 @@ if __name__ == '__main__':
     else:
         raise Exception("INVALID JUG!!!!")
     waterjug = WaterJug(start, cap1, cap2, goal)
-    waterjug.Solve()
+    soln = waterjug.Solve()
+    i,j = soln
+    for h,k in zip(i,j):
+        print("========================")
+        print(h)
+        print(k)
+        print("========================")
